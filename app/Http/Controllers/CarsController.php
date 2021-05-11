@@ -39,7 +39,7 @@ class CarsController extends Controller
      */
     public function create()
     {
-        //
+        return view('cars.create');
     }
 
     /**
@@ -50,7 +50,22 @@ class CarsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $car = new Car;
+        // $car->name = $request->input('name');
+        // $car->founded = $request->input('founded');
+        // $car->description = $request->input('description');
+
+        //saving the new car instance to the database & printing it on the view
+        // $car->save();
+
+        #============ Second method, by passing an array to a model ========#
+        //=== If we use make instead of create, we will need to the save()method to store it =====//
+        $car = Car::create([
+            'name' => $request->input('name'),
+            'founded' => $request->input('founded'),
+            'description' => $request->input('description')
+        ]);
+        return redirect('/cars');
     }
 
     /**
@@ -72,7 +87,8 @@ class CarsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $car = Car::findOrFail($id);
+        return view('cars.edit')->with('car', $car);
     }
 
     /**
@@ -84,7 +100,14 @@ class CarsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $car = Car::where('id', $id)
+            ->update([
+                'name' => $request->input('name'),
+                'founded' => $request->input('founded'),
+                'description' => $request->input('description')
+        ]);
+
+        return redirect('/cars');
     }
 
     /**
@@ -93,8 +116,13 @@ class CarsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+
+     //==== Here, we used model to delete the car instance ====//
+    public function destroy(Car $car)
     {
-        //
+        // $car = Car::find($id)->first();
+        $car->delete();
+
+        return redirect('/cars');
     }
 }
