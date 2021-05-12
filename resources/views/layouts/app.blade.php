@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <title>Car Models</title>
 </head>
-<body class="bg-gradient-to-r from-gray-100 to-gray-200">
+<body class="bg-gradient-to-r from-black-100 to-black-200">
     @yield('content')
 </body>
 </html>

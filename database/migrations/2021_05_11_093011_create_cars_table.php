@@ -20,6 +20,19 @@ class CreateCarsTable extends Migration
             $table->longText('description');
             $table->timestamps();
         });
+
+        //===== Creating a relation table (car_models) =====//
+        #NB:=== You can also create a new migration to perform this
+        Schema::create('car_models', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('car_id');
+            $table->string('model_name');
+            $table->timestamps();
+            $table->foreign('car_id')
+                ->references('id')
+                ->on('cars')
+                ->onDelete('cascade');
+        });
     }
 
     /**

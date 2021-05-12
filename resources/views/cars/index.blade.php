@@ -4,7 +4,7 @@
 
 <div class="m-auto py-24">
     <div class="text-center">
-        <h1 class="text-5xl uppercase bold text-black">
+        <h1 class="text-5xl uppercase bold">
             Cars
         </h1>
     </div>
@@ -16,7 +16,7 @@
     </div>
 
     <div class="w-5/6 py-10 ml-20">
-       @foreach ($cars as $car );
+       @foreach ($cars as $car )
             <div class="m-auto">
                 <div class="float-right">
                     <a href="cars/{{ $car->id }}/edit"
@@ -35,10 +35,12 @@
                 <span class="uppercase text-blue-500 font-bold text-xs italic">
                     Founded: {{ $car->founded }}
                 </span> 
-                <h2 class="text-gray-700 text-5xl py-6">
-                    {{ $car->name }}
+                <h2 class="text-5xl py-6">
+                    <a href="/cars/{{ $car->id }}">
+                        {{ $car->name }}
+                    </a>
                 </h2>
-                <p class="text-lg text-gray-700">
+                <p class="text-lg text-white-700">
                     {{ $car->description }}
                 </p>
                 <hr class="mt-4 mb-8">
